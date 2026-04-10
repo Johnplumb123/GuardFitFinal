@@ -21,80 +21,80 @@ def calculate_score(app):
         app["health_data"],
         10,
         "Health Data",
-        "Handles personal fitness or health data",
-        "Example: Stores workouts, heart rate, calorie data",
+        "Handles personal fitness or health data.",
+        "Stores metrics such as workouts, calories, heart rate, or activity history.",
     )
 
     apply_deduction(
         app["sensitive_info"],
-        15,
+        10,
         "Sensitive Information",
-        "Processes highly sensitive personal data",
-        "Example: Health conditions or biometric insights",
+        "Processes more sensitive personal or wellness-related information.",
+        "Could include biometric insights, detailed wellness records, or other sensitive health-related attributes.",
     )
 
     apply_deduction(
         app["location_data"],
         15,
         "Location Data",
-        "Tracks user location",
-        "Example: GPS routes during runs or workouts",
+        "Uses or stores location information.",
+        "Tracks GPS routes, running paths, or location-based workout activity.",
     )
 
     apply_deduction(
         app["tracking"],
         25,
         "Cross-Service Tracking",
-        "Tracks users across platforms",
-        "Example: Shares data with third-party advertisers",
+        "Tracks users across services or supports broader profiling.",
+        "May support advertising, cross-platform analytics, or broader user tracking.",
     )
 
     apply_deduction(
         app["identifiers"],
         5,
         "Identifiers",
-        "Uses personal identifiers",
-        "Example: User ID, email, or device ID tracking",
+        "Uses identifying account or device-linked information.",
+        "Such as user IDs, email-linked accounts, or device identifiers.",
     )
 
     apply_deduction(
         app["contact_info"],
         5,
         "Contact Information",
-        "Collects personal contact details",
-        "Example: Email or phone number required",
+        "Collects personal contact details.",
+        "Such as email address, profile details, or phone-related account information.",
     )
 
     apply_deduction(
         app["contacts"],
         15,
         "Contacts Access",
-        "Accesses user contacts",
-        "Example: Syncing friends from contact list",
+        "Accesses or links to the user’s contacts.",
+        "For example, syncing contacts or finding friends through address book data.",
     )
 
     apply_deduction(
         app["usage_data"],
         5,
         "Usage Data",
-        "Tracks user behaviour",
-        "Example: Monitoring app activity or engagement",
+        "Collects behavioural or interaction data.",
+        "Tracks how users interact with the app, features used, or engagement activity.",
     )
 
     apply_deduction(
         app["user_content"],
         5,
         "User Content",
-        "Stores user-generated content",
-        "Example: Posts, workout logs, shared activity",
+        "Stores user-generated content or submitted activity data.",
+        "Includes logs, posts, progress entries, shared workout content, or manually added records.",
     )
 
     apply_deduction(
         app["diagnostics"],
         5,
         "Diagnostics",
-        "Collects device diagnostic data",
-        "Example: Crash reports and performance metrics",
+        "Collects technical diagnostic or crash-related data.",
+        "Includes performance logging, crash reporting, or troubleshooting telemetry.",
     )
 
     score = max(score, 0)
@@ -112,8 +112,7 @@ def calculate_score(app):
         "reasons": reasons,
         "deductions": deductions,
         "summary": (
-            "Higher scores indicate stronger privacy protection and lower data exposure. "
-            "Lower scores indicate increased privacy risk due to broader collection, "
-            "tracking, or linkage practices."
+            "Higher scores indicate stronger privacy protection and fewer data exposure risks. "
+            "Lower scores reflect broader collection, tracking, or linkage practices."
         ),
     }

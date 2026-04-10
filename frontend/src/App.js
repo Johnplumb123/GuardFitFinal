@@ -38,20 +38,20 @@ function App() {
   }, []);
 
   const appDescriptions = {
-    "Nike Training Club":
-      "A guided workout and training app focused on home workouts, strength sessions, mobility, and fitness plans.",
     "Apple Health":
-      "A health tracking platform that stores and organises fitness, activity, sleep, and wellness data within the Apple ecosystem.",
+      "A health tracking platform that organises fitness, activity, sleep, and wellness data within the Apple ecosystem.",
+    "Nike Training Club":
+      "A guided workout and training app focused on exercise plans, strength sessions, mobility, and home workouts.",
     "MyFitnessPal":
-      "A calorie counting and nutrition tracking app used for logging meals, monitoring diet, and supporting weight goals.",
+      "A calorie-counting and nutrition tracking app used to log meals, monitor diet, and support weight goals.",
     "Google Fit":
-      "A health and activity tracking app used to monitor movement, workouts, heart points, and overall daily fitness.",
-    Strava:
-      "A social fitness tracking app mainly used for running and cycling, with route mapping, performance tracking, and community features.",
-    Fitbit:
+      "A health and activity tracking app used to monitor movement, heart points, workouts, and overall daily fitness.",
+    "Strava":
+      "A social fitness tracking app focused on running and cycling, with route mapping, performance tracking, and community features.",
+    "Fitbit":
       "A wearable-connected fitness app used for tracking activity, sleep, heart rate, exercise, and long-term health metrics.",
     "ASICS Runkeeper":
-      "A running-focused fitness app used to track runs, routes, pace, goals, and training progress over time.",
+      "A running-focused app used to track routes, pace, goals, and training progress over time.",
   };
 
   const filteredApps = useMemo(() => {
@@ -101,6 +101,20 @@ function App() {
     if (score >= 80) return "LOW";
     if (score >= 50) return "MED";
     return "HIGH";
+  };
+
+  const buildSelectedSummary = (app) => {
+    if (!app) return "";
+
+    if (app.privacy_score >= 80) {
+      return `${app.app_name} achieved a relatively strong privacy score because it shows fewer high-risk behaviours such as cross-service tracking, contacts access, and location-heavy data exposure.`;
+    }
+
+    if (app.privacy_score >= 50) {
+      return `${app.app_name} presents a moderate privacy profile. It avoids some of the most severe risk factors, but still loses points through identifiable data use, usage monitoring, or content-related collection.`;
+    }
+
+    return `${app.app_name} received a lower privacy score because multiple higher-risk factors are present, such as tracking, location use, contacts access, or broader personal data collection.`;
   };
 
   return (
@@ -243,9 +257,9 @@ function App() {
             </div>
 
             <div className="insight-box">
-              <strong>Tracking and identifiers</strong> remain some of the most
-              influential causes of privacy score deductions across the apps
-              analysed.
+              <strong>Tracking and location-related collection</strong> remain
+              among the strongest contributors to lower privacy scores across
+              the analysed apps.
             </div>
           </div>
         </section>
@@ -279,6 +293,7 @@ function App() {
                     <th>Rank</th>
                     <th>App</th>
                     <th>Score</th>
+                    <th>Risk</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -289,6 +304,11 @@ function App() {
                       <td>
                         <span className={getScoreClass(app.privacy_score)}>
                           {app.privacy_score}/100
+                        </span>
+                      </td>
+                      <td>
+                        <span className={getRiskClass(app.risk_level)}>
+                          {app.risk_level}
                         </span>
                       </td>
                     </tr>
@@ -338,10 +358,18 @@ function App() {
                     {appDescriptions[selectedApp.app_name] ||
                       "A fitness application included in the GuardFit privacy comparison."}
                   </p>
+
+                  <p className="selected-summary">
+                    {buildSelectedSummary(selectedApp)}
+                  </p>
                 </div>
 
-                {selectedApp.deductions &&
-                  selectedApp.deductions.slice(0, 2).map((item, index) => (
+                <div className="panel-subtext" style={{ marginTop: "8px" }}>
+                  <strong>Why this app lost points:</strong>
+                </div>
+
+                {selectedApp.deductions && selectedApp.deductions.length > 0 ? (
+                  selectedApp.deductions.map((item, index) => (
                     <div key={index} className="deduction-card">
                       <div className="deduction-head">
                         <div className="deduction-title">
@@ -358,7 +386,15 @@ function App() {
                       </p>
                       <p className="deduction-example">{item.example}</p>
                     </div>
-                  ))}
+                  ))
+                ) : (
+                  <div className="deduction-card">
+                    <p className="deduction-description">
+                      This app did not trigger any deduction factors in the
+                      current model.
+                    </p>
+                  </div>
+                )}
               </>
             )}
           </div>

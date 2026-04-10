@@ -19,11 +19,61 @@ app.add_middleware(
 def seed_database():
     db = SessionLocal()
     try:
-        existing = db.query(FitnessApp).count()
-        if existing > 0:
-            return
+        existing_names = {app.name for app in db.query(FitnessApp).all()}
 
         apps = [
+            FitnessApp(
+                name="Apple Health",
+                health_data=True,
+                sensitive_info=False,
+                location_data=False,
+                tracking=False,
+                identifiers=True,
+                contact_info=False,
+                contacts=False,
+                usage_data=False,
+                user_content=False,
+                diagnostics=True,
+            ),
+            FitnessApp(
+                name="Nike Training Club",
+                health_data=True,
+                sensitive_info=False,
+                location_data=False,
+                tracking=False,
+                identifiers=True,
+                contact_info=False,
+                contacts=False,
+                usage_data=True,
+                user_content=True,
+                diagnostics=True,
+            ),
+            FitnessApp(
+                name="MyFitnessPal",
+                health_data=True,
+                sensitive_info=True,
+                location_data=False,
+                tracking=True,
+                identifiers=True,
+                contact_info=True,
+                contacts=False,
+                usage_data=True,
+                user_content=True,
+                diagnostics=True,
+            ),
+            FitnessApp(
+                name="Google Fit",
+                health_data=True,
+                sensitive_info=False,
+                location_data=True,
+                tracking=True,
+                identifiers=True,
+                contact_info=True,
+                contacts=False,
+                usage_data=True,
+                user_content=False,
+                diagnostics=True,
+            ),
             FitnessApp(
                 name="Strava",
                 health_data=True,
@@ -38,10 +88,10 @@ def seed_database():
                 diagnostics=True,
             ),
             FitnessApp(
-                name="MyFitnessPal",
+                name="ASICS Runkeeper",
                 health_data=True,
-                sensitive_info=False,
-                location_data=False,
+                sensitive_info=True,
+                location_data=True,
                 tracking=True,
                 identifiers=True,
                 contact_info=True,
@@ -63,62 +113,13 @@ def seed_database():
                 user_content=True,
                 diagnostics=True,
             ),
-            FitnessApp(
-                name="Apple Health",
-                health_data=True,
-                sensitive_info=True,
-                location_data=False,
-                tracking=False,
-                identifiers=False,
-                contact_info=False,
-                contacts=False,
-                usage_data=False,
-                user_content=False,
-                diagnostics=False,
-            ),
-            FitnessApp(
-                name="Google Fit",
-                health_data=True,
-                sensitive_info=False,
-                location_data=True,
-                tracking=True,
-                identifiers=True,
-                contact_info=True,
-                contacts=False,
-                usage_data=True,
-                user_content=False,
-                diagnostics=True,
-            ),
-            FitnessApp(
-                name="ASICS Runkeeper",
-                health_data=True,
-                sensitive_info=True,
-                location_data=True,
-                tracking=True,
-                identifiers=True,
-                contact_info=True,
-                contacts=False,
-                usage_data=True,
-                user_content=True,
-                diagnostics=True,
-            ),
-            FitnessApp(
-                name="Nike Training Club",
-                health_data=True,
-                sensitive_info=False,
-                location_data=False,
-                tracking=False,
-                identifiers=False,
-                contact_info=False,
-                contacts=False,
-                usage_data=True,
-                user_content=False,
-                diagnostics=False,
-            ),
         ]
 
-        db.add_all(apps)
-        db.commit()
+        new_apps = [app for app in apps if app.name not in existing_names]
+
+        if new_apps:
+            db.add_all(new_apps)
+            db.commit()
     finally:
         db.close()
 
