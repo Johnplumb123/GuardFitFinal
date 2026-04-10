@@ -72,6 +72,7 @@ function App() {
 
   const bestApp = apps.length ? apps[0] : null;
   const worstApp = apps.length ? apps[apps.length - 1] : null;
+
   const averageScore = apps.length
     ? Math.round(
         apps.reduce((sum, app) => sum + app.privacy_score, 0) / apps.length
@@ -184,8 +185,8 @@ function App() {
           <div className="panel">
             <h2>Ranking Overview</h2>
             <p className="panel-subtext">
-              Compare privacy scores of popular fitness apps. <strong>Higher
-              scores</strong> mean better privacy protection.
+              Compare privacy scores of popular fitness apps.{" "}
+              <strong>Higher scores</strong> mean better privacy protection.
             </p>
 
             <div className="chart-wrapper">
@@ -198,7 +199,6 @@ function App() {
                   <XAxis
                     dataKey="app_name"
                     interval={0}
-                    angle={0}
                     tick={{ fontSize: 12 }}
                   />
                   <YAxis domain={[0, 100]} />
@@ -217,7 +217,9 @@ function App() {
 
             <div className="legend-row">
               <span className="legend-pill low">80-100 Low Risk</span>
-              <span className="legend-pill moderate">50-79 Moderate Risk</span>
+              <span className="legend-pill moderate">
+                50-79 Moderate Risk
+              </span>
               <span className="legend-pill high">0-49 High Risk</span>
             </div>
           </div>
@@ -229,9 +231,9 @@ function App() {
             </div>
 
             <div className="insight-box">
-              <strong>{bestApp ? bestApp.app_name : "Top app"}</strong>{" "}
-              scored highest in this comparison, indicating comparatively lower
-              data exposure and fewer invasive practices.
+              <strong>{bestApp ? bestApp.app_name : "Top app"}</strong> scored
+              highest in this comparison, indicating comparatively lower data
+              exposure and fewer invasive practices.
             </div>
 
             <div className="insight-box">
@@ -338,30 +340,32 @@ function App() {
                   </p>
                 </div>
 
-                {selectedApp.deductions.slice(0, 2).map((item, index) => (
-                  <div key={index} className="deduction-card">
-                    <div className="deduction-head">
-                      <div className="deduction-title">
-                        <FaShieldAlt />
-                        <span>{item.factor}</span>
+                {selectedApp.deductions &&
+                  selectedApp.deductions.slice(0, 2).map((item, index) => (
+                    <div key={index} className="deduction-card">
+                      <div className="deduction-head">
+                        <div className="deduction-title">
+                          <FaShieldAlt />
+                          <span>{item.factor}</span>
+                        </div>
+                        <span className="deduction-points">
+                          -{item.points}
+                        </span>
                       </div>
-                      <span className="deduction-points">-{item.points}</span>
-                    </div>
 
-                    <p className="deduction-description">
-                      {item.description}
-                    </p>
-                    <p className="deduction-example">{item.example}</p>
-                  </div>
-                ))}
+                      <p className="deduction-description">
+                        {item.description}
+                      </p>
+                      <p className="deduction-example">{item.example}</p>
+                    </div>
+                  ))}
               </>
             )}
           </div>
         </section>
 
         <footer className="footer">
-          GuardFit Dissertation Prototype &nbsp;|&nbsp; Built by John Plumb -
-          2024
+          GuardFit Dissertation Prototype | Built by John Plumb - 2024
         </footer>
       </main>
     </div>

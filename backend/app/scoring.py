@@ -27,7 +27,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["sensitive_info"],
-        12,
+        15,
         "Sensitive Information",
         "Processes highly sensitive personal data",
         "Example: Health conditions or biometric insights",
@@ -35,7 +35,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["location_data"],
-        10,
+        15,
         "Location Data",
         "Tracks user location",
         "Example: GPS routes during runs or workouts",
@@ -43,7 +43,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["tracking"],
-        15,
+        25,
         "Cross-Service Tracking",
         "Tracks users across platforms",
         "Example: Shares data with third-party advertisers",
@@ -51,7 +51,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["identifiers"],
-        8,
+        5,
         "Identifiers",
         "Uses personal identifiers",
         "Example: User ID, email, or device ID tracking",
@@ -59,7 +59,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["contact_info"],
-        8,
+        5,
         "Contact Information",
         "Collects personal contact details",
         "Example: Email or phone number required",
@@ -67,7 +67,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["contacts"],
-        10,
+        15,
         "Contacts Access",
         "Accesses user contacts",
         "Example: Syncing friends from contact list",
@@ -75,7 +75,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["usage_data"],
-        8,
+        5,
         "Usage Data",
         "Tracks user behaviour",
         "Example: Monitoring app activity or engagement",
@@ -91,7 +91,7 @@ def calculate_score(app):
 
     apply_deduction(
         app["diagnostics"],
-        4,
+        5,
         "Diagnostics",
         "Collects device diagnostic data",
         "Example: Crash reports and performance metrics",
