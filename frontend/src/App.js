@@ -26,7 +26,7 @@ function App() {
   const [activeFilter, setActiveFilter] = useState("All Apps");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/compare")
+    fetch("https://guardfitframework.onrender.com/compare")
       .then((res) => res.json())
       .then((data) => {
         setApps(data);
