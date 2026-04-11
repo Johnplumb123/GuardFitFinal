@@ -46,9 +46,9 @@ function App() {
       "A calorie-counting and nutrition tracking app used to log meals, monitor diet, and support weight goals.",
     "Google Fit":
       "A health and activity tracking app used to monitor movement, heart points, workouts, and overall daily fitness.",
-    "Strava":
+    Strava:
       "A social fitness tracking app focused on running and cycling, with route mapping, performance tracking, and community features.",
-    "Fitbit":
+    Fitbit:
       "A wearable-connected fitness app used for tracking activity, sleep, heart rate, exercise, and long-term health metrics.",
     "ASICS Runkeeper":
       "A running-focused app used to track routes, pace, goals, and training progress over time.",
